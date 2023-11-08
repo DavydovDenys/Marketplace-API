@@ -1,0 +1,156 @@
+require:
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 2.7
+  Exclude:
+    - 'config/initializers/rswag-api.rb'
+    - 'config/initializers/rswag-ui.rb'
+    - 'db/seeds.rb'
+    - 'db/schema.rb'
+    - 'db/migrate/*'
+    - 'node_modules/**/*'
+    - 'frontend/**/*'
+    - 'vendor/bundle/**/*'
+
+Metrics/BlockLength:
+  Max: 30
+  Exclude:
+    - 'spec/**/*'
+    - 'config/routes.rb'
+    - 'config/environments/*.rb'
+
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - 'bin/bundle'
+
+Metrics/PerceivedComplexity:
+  Exclude:
+    - 'bin/bundle'
+
+Layout/LineLength:
+  Max: 120
+  Exclude:
+    - 'bin/bundle'
+
+Metrics/AbcSize:
+  Exclude:
+    - 'bin/bundle'
+
+Metrics/MethodLength:
+  Max: 11
+  Exclude:
+    - 'bin/bundle'
+
+Layout/EndOfLine:
+  Enabled: False
+
+Lint/EmptyBlock:
+  Exclude:
+    - 'spec/**/*'
+
+Lint/MissingSuper:
+  Exclude:
+    - 'app/services/prevounce/get_notifications.rb'
+    - 'app/services/send_shield_data.rb'
+
+Lint/DuplicateBranch:
+  Exclude:
+    - 'app/controllers/api/base_api_controller.rb'
+
+Metrics/ClassLength:
+  Exclude:
+    - 'app/services/main/*'
+    - 'app/services/prevounce/*'
+    - 'app/services/musc/*'
+
+Metrics/ParameterLists:
+  Max: 18
+
+Rails/HasAndBelongsToMany:
+  Enabled: false
+
+Style/MixinUsage:
+  Enabled: false
+Style/Documentation:
+  Description: 'Document classes and non-namespace modules.'
+  Enabled: false
+Style/FormatStringToken:
+  EnforcedStyle: template
+Style/Semicolon:
+  Exclude:
+    - 'spec/support/services/shared_examples/*'
+
+Naming/AccessorMethodName:
+  Exclude:
+    - 'app/datatables/**/*'
+
+Naming/MethodParameterName:
+  Exclude:
+    -  'app/services/prevounce/*'
+
+Naming/MethodName:
+  Exclude:
+    - 'app/controllers/api/v2/adapter/prevounce_controller.rb'
+    - 'app/controllers/api/v2/adapter/musc_controller.rb'
+
+Style/FrozenStringLiteralComment:
+  Exclude:
+    - 'config/initializers/version.rb'
+
+Rails/FilePath:
+  EnforcedStyle: arguments
+
+Rails/TimeZone:
+  Enabled: false
+
+Rails/Date:
+  Enabled: false
+
+Rails/OutputSafety:
+  Enabled: false
+
+Rails/SkipsModelValidations:
+  Enabled: false
+
+Rails/DynamicFindBy:
+  Whitelist:
+    - find_by_invitation_token
+
+Rails/UniqueValidationWithoutIndex:
+  Enabled: false
+
+Rails/HasManyOrHasOneDependent:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+
+RSpec/EmptyExampleGroup:
+  Enabled: false
+
+RSpec/VariableName:
+  Enabled: false
+
+RSpec/NamedSubject:
+  Enabled: false
+
+RSpec/MessageChain:
+  Enabled: false
+
+RSpec/VerifiedDoubles:
+  Exclude:
+    - 'spec/services/main/base_spec.rb'
+
+RSpec/AnyInstance:
+  Exclude:
+    - 'spec/services/main/base_spec.rb'
