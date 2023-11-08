@@ -7,23 +7,42 @@
 # Ignore bundler config.
 /.bundle
 
+#ignore env setup files
+/.env
+
+*.DS_Store
+
+/.env.local
+
+#ignore api generation file
+/swagger/*
+
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
 !/log/.keep
 !/tmp/.keep
 
-# Ignore pidfiles, but keep the directory.
-/tmp/pids/*
-!/tmp/pids/
-!/tmp/pids/.keep
-
-# Ignore uploaded files in development.
+# Ignore uploaded files in development
 /storage/*
 !/storage/.keep
-/tmp/storage/*
-!/tmp/storage/
-!/tmp/storage/.keep
+
+/node_modules
+/yarn-error.log
+
+/public/assets
+.byebug_history
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity
+.idea
+.vscode
+coverage
+.prevounce_token
