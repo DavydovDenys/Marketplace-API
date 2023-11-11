@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: api
+    depends_on:
+      - database
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+    env_file:
+      - ./env/.env.dev
+    environment:
+      RAILS_ENV: development
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+
+  migrations:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: [ "bundle", "exec", "rake", "db:migrate" ]
+    container_name: api_migrations
+    depends_on:
+      - database
+    volumes:
+      - .:/app
+    env_file:
+      - ./env/.env.dev
+
+  database:
+    image: postgres:16.0
+    container_name: api_database
+    env_file:
+      - ./env/.env.dev
+    environment:
+      RAILS_ENV: development
+    ports:
+      - 5433:5432
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./entrypoints/init_database_docker.sh:/docker-entrypoint-initdb.d/init_database_docker.sh
+    restart: unless-stopped
+
+volumes:
+  db_data:
