@@ -2,25 +2,11 @@
 
 # Marketplace-API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Ruby version - `3.2.2`
+# How to run the application locally:
+* clone this repository
+* `cd Marketplace-API`
+* `make run`
+* visit - http://localhost:3000/
+* Enjoy
+![rails](https://github.com/DavydovDenys/Marketplace-API/assets/52884876/702365ab-118a-4790-b069-a8cc66517b2d)
