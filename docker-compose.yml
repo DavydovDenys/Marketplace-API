@@ -14,7 +14,7 @@ services:
     volumes:
       - .:/app
     env_file:
-      - ./env/.env.dev
+      - ./env/.env.docker
     environment:
       RAILS_ENV: development
     stdin_open: true
@@ -32,13 +32,13 @@ services:
     volumes:
       - .:/app
     env_file:
-      - ./env/.env.dev
+      - ./env/.env.docker
 
   database:
     image: postgres:16.0
     container_name: api_database
     env_file:
-      - ./env/.env.dev
+      - ./env/.env.docker
     environment:
       RAILS_ENV: development
     ports:
@@ -52,7 +52,7 @@ services:
     image: redis:7-alpine
     container_name: api_redis
     env_file:
-      - ./env/.env.dev
+      - ./env/.env.docker
     restart: unless-stopped
 
 volumes:

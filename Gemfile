@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.2.2'
+gem 'dotenv-rails', require: 'dotenv/rails-now'
 gem 'jbuilder'
 gem 'jwt'
 gem 'pg', '~> 1.1'
@@ -21,6 +22,7 @@ gem 'bootsnap', require: false
 gem 'factory_bot_rails'
 gem 'faker', '~> 3.2.2'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+gem 'simplecov-small-badge', require: false
 # gem "image_processing", "~> 1.2"
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
@@ -32,7 +34,7 @@ group :development, :test do
   gem 'byebug'
   # gem 'letter_opener_web', '~> 1.4.0'
   gem 'debug', platforms: %i[mri mingw x64_mingw]
-  gem 'dotenv-rails', require: 'dotenv/rails-now'
+  # gem 'dotenv-rails', require: 'dotenv/rails-now'
   gem 'rspec-rails', '~> 6.0.3'
   gem 'rswag-specs', '~> 2.11.0'
   gem 'rubocop', '~> 1.57.2', require: false
@@ -54,7 +56,6 @@ group :test do
   gem 'rspec_junit_formatter'
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
-  gem 'simplecov-small-badge', require: false
   gem 'webmock'
 end
 
