@@ -2,7 +2,6 @@
 
 class HealthzController < ApplicationController
   def index
-    redis.new
     render json: params
   end
 
