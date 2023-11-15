@@ -1,8 +1,8 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  username: api
-  password: api
+  username: <%= ENV['POSTGRES_USER'] %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
   # url: <%= ENV['DATABASE_URL'] %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
@@ -17,8 +17,7 @@ test:
   url: <%= ENV['TEST_DATABASE_URL'] %>
   database: api_rails_test
 
-# production:
+production:
   <<: *default
-  database: marketplace_production
-  username: marketplace
-  password: <%= ENV["MARKETPLACE_DATABASE_PASSWORD"] %>
+  database: api_marketplace_production
+  url: <%= ENV['PROD_DATABASE_URL'] %>
