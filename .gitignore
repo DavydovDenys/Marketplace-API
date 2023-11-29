@@ -19,7 +19,7 @@ dump.rdb
 /.env.local
 
 #ignore api generation file
-/swagger/*
+# /swagger/*
 
 # Ignore all logfiles and tempfiles.
 /log/*

@@ -1,0 +1,356 @@
+{
+  "cookie": {
+    "description": "cookie",
+    "type": "apiKey",
+    "name": "cookie",
+    "in": "header"
+  },
+  "components": {
+    "securitySchemes": {
+      "Bearer": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  },
+  "openapi": "3.0.1",
+  "info": {
+    "title": "API",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/v1/auth/registry": {
+      "post": {
+        "summary": "create user",
+        "tags": [
+          "Authentication"
+        ],
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string"
+                    },
+                    "access_token": {
+                      "type": "string"
+                    },
+                    "refresh_token": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "result": "OK",
+                    "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VyX2VtYWlsIjoidGVzdEBtYWlsLmNvbSIsImV4cCI6MTcwMDkyNDAyOH0.nuJ-2HFN0IK5mRFaaPsRnxGmPROmJ70nciGgNKQML4M",
+                    "refresh_token": "6c4ac53ebb510e001237b4bb536728593f1b1ea6453e91a5509e98iGgNKQML4M"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "example_0": {
+                    "value": [
+                      {
+                        "result": "Bad Credentials",
+                        "errors": [
+                          "Email has already been taken"
+                        ]
+                      },
+                      {
+                        "result": "Bad Credentials",
+                        "errors": [
+                          "Email is invalid"
+                        ]
+                      },
+                      {
+                        "result": "Bad Credentials",
+                        "errors": [
+                          "Password is invalid"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "aray",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user": {
+                    "type": "object",
+                    "properties": {
+                      "email": {
+                        "type": "string"
+                      },
+                      "password": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "user": {
+                    "email": "claris@metz.test",
+                    "password": "1e0ff691a8a88f92#A"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        }
+      }
+    },
+    "/api/v1/auth/refresh": {
+      "post": {
+        "summary": "recreate access and refresh tokens",
+        "tags": [
+          "Authentication"
+        ],
+        "security": [
+          {
+            "Bearer": {
+            }
+          }
+        ],
+        "parameters": [
+          {
+            "name": "cookie",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string"
+                    },
+                    "access_token": {
+                      "type": "string"
+                    },
+                    "refresh_token": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "result": "OK",
+                    "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VyX2VtYWlsIjoidGVzdEBtYWlsLmNvbSIsImV4cCI6MTcwMDkyNDAyOH0.nuJ-2HFN0IK5mRFaaPsRnxGmPROmJ70nciGgNKQML4M",
+                    "refresh_token": "6c4ac53ebb510e001237b4bb536728593f1b1ea6453e91a5509e98iGgNKQML4M"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "example_0": {
+                    "value": [
+                      {
+                        "result": "Unauthorized",
+                        "errors": [
+                          "Token doesn't exist"
+                        ]
+                      },
+                      {
+                        "result": "Unauthorized",
+                        "errors": [
+                          "Signature has expired"
+                        ]
+                      },
+                      {
+                        "result": "Unauthorized",
+                        "errors": [
+                          "Token mismatch"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "aray",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/login": {
+      "post": {
+        "summary": "user login",
+        "tags": [
+          "Authentication"
+        ],
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string"
+                    },
+                    "access_token": {
+                      "type": "string"
+                    },
+                    "refresh_token": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "result": "OK",
+                    "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VyX2VtYWlsIjoidGVzdEBtYWlsLmNvbSIsImV4cCI6MTcwMDkyNDAyOH0.nuJ-2HFN0IK5mRFaaPsRnxGmPROmJ70nciGgNKQML4M",
+                    "refresh_token": "6c4ac53ebb510e001237b4bb536728593f1b1ea6453e91a5509e98iGgNKQML4M"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "aray",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "example": {
+                    "result": "Not Found",
+                    "errors": [
+                      "Couldn't find User with 'id'=45"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Credentials, password is invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "aray",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "example": {
+                    "result": "Bad Credentials",
+                    "errors": [
+                      "Password is invalid"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user": {
+                    "type": "object",
+                    "properties": {
+                      "email": {
+                        "type": "string"
+                      },
+                      "password": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "user": {
+                    "email": "claris@metz.test",
+                    "password": "1e0ff691a8a88f92#A"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        }
+      }
+    }
+  }
+}
