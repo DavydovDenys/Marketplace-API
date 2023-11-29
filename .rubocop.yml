@@ -2,18 +2,17 @@ require:
   - rubocop-performance
   - rubocop-rails
   - rubocop-rspec
+  - rubocop-factory_bot
 
 AllCops:
   NewCops: enable
-  TargetRubyVersion: 2.7
+  TargetRubyVersion: 3.2.2
   Exclude:
     - 'config/initializers/rswag-api.rb'
     - 'config/initializers/rswag-ui.rb'
     - 'db/seeds.rb'
     - 'db/schema.rb'
     - 'db/migrate/*'
-    - 'node_modules/**/*'
-    - 'frontend/**/*'
     - 'vendor/bundle/**/*'
 
 Metrics/BlockLength:
@@ -39,11 +38,13 @@ Layout/LineLength:
 Metrics/AbcSize:
   Exclude:
     - 'bin/bundle'
+    - 'app/controllers/api/v1/authentication_controller.rb'
 
 Metrics/MethodLength:
   Max: 11
   Exclude:
     - 'bin/bundle'
+    - 'app/controllers/api/v1/authentication_controller.rb'
 
 Layout/EndOfLine:
   Enabled: False
@@ -54,18 +55,15 @@ Lint/EmptyBlock:
 
 Lint/MissingSuper:
   Exclude:
-    - 'app/services/prevounce/get_notifications.rb'
-    - 'app/services/send_shield_data.rb'
+    
 
 Lint/DuplicateBranch:
   Exclude:
-    - 'app/controllers/api/base_api_controller.rb'
+    - 'app/controllers/api/v1/authentication_controller.rb'
 
 Metrics/ClassLength:
   Exclude:
-    - 'app/services/main/*'
-    - 'app/services/prevounce/*'
-    - 'app/services/musc/*'
+    
 
 Metrics/ParameterLists:
   Max: 18
@@ -75,27 +73,33 @@ Rails/HasAndBelongsToMany:
 
 Style/MixinUsage:
   Enabled: false
+
 Style/Documentation:
   Description: 'Document classes and non-namespace modules.'
   Enabled: false
+
 Style/FormatStringToken:
   EnforcedStyle: template
+
+Style/HashSyntax:
+  Exclude:
+    - 'app/controllers/api/v1/authentication_controller.rb'
+
 Style/Semicolon:
   Exclude:
-    - 'spec/support/services/shared_examples/*'
+    
 
 Naming/AccessorMethodName:
   Exclude:
-    - 'app/datatables/**/*'
+    
 
 Naming/MethodParameterName:
   Exclude:
-    -  'app/services/prevounce/*'
+    
 
 Naming/MethodName:
   Exclude:
-    - 'app/controllers/api/v2/adapter/prevounce_controller.rb'
-    - 'app/controllers/api/v2/adapter/musc_controller.rb'
+    
 
 Style/FrozenStringLiteralComment:
   Exclude:
@@ -149,8 +153,8 @@ RSpec/MessageChain:
 
 RSpec/VerifiedDoubles:
   Exclude:
-    - 'spec/services/main/base_spec.rb'
+    
 
 RSpec/AnyInstance:
   Exclude:
-    - 'spec/services/main/base_spec.rb'
+    
