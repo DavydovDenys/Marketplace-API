@@ -83,6 +83,7 @@ Style/FormatStringToken:
 
 Style/HashSyntax:
   Exclude:
+    - 'spec/requests/api/v1/authentication_spec.rb'
     - 'app/controllers/api/v1/authentication_controller.rb'
 
 Style/Semicolon:
@@ -153,8 +154,10 @@ RSpec/MessageChain:
 
 RSpec/VerifiedDoubles:
   Exclude:
-    
 
 RSpec/AnyInstance:
   Exclude:
     
+RSpec/ScatteredSetup:
+  Exclude:
+  - 'spec/requests/api/v1/authentication_spec.rb'
