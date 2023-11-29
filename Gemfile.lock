@@ -149,6 +149,7 @@ GEM
     method_source (1.0.0)
     mini_mime (1.1.5)
     minitest (5.20.0)
+    mock_redis (0.16.1)
     msgpack (1.7.2)
     net-imap (0.4.4)
       date
@@ -341,6 +342,7 @@ DEPENDENCIES
   jwt
   kaminari (~> 1.2.2)
   listen (~> 3.8.0)
+  mock_redis (~> 0.16.1)
   pg (~> 1.1)
   pry
   puma (~> 5.0)

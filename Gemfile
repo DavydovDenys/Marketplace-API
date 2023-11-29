@@ -51,6 +51,7 @@ group :development do
 end
 
 group :test do
+  gem 'mock_redis', '~> 0.16.1'
   gem 'rspec'
   # RSpec 2 & 3 results that your CI can read
   gem 'rspec_junit_formatter'
