@@ -49,7 +49,7 @@
                   },
                   "example": {
                     "result": "OK",
-                    "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VyX2VtYWlsIjoidGVzdEBtYWlsLmNvbSIsImV4cCI6MTcwMDkyNDAyOH0.nuJ-2HFN0IK5mRFaaPsRnxGmPROmJ70nciGgNKQML4M",
+                    "access_token": "eyJhbGciOiJIUzI1NiJ9. eyJ1c2VyX2lkIjoxLCJ1c2VyX2VtYWlsIjoidGVzdEBtYWlsLmNvbSIsImV4cCI6MTcwMDkyNDAyOH0. nuJ-2HFN0IK5mRFaaPsRnxGmPROmJ70nciGgNKQML4M",
                     "refresh_token": "6c4ac53ebb510e001237b4bb536728593f1b1ea6453e91a5509e98iGgNKQML4M"
                   }
                 }
@@ -175,7 +175,7 @@
                   },
                   "example": {
                     "result": "OK",
-                    "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VyX2VtYWlsIjoidGVzdEBtYWlsLmNvbSIsImV4cCI6MTcwMDkyNDAyOH0.nuJ-2HFN0IK5mRFaaPsRnxGmPROmJ70nciGgNKQML4M",
+                    "access_token": "eyJhbGciOiJIUzI1NiJ9. eyJ1c2VyX2lkIjoxLCJ1c2VyX2VtYWlsIjoidGVzdEBtYWlsLmNvbSIsImV4cCI6MTcwMDkyNDAyOH0. nuJ-2HFN0IK5mRFaaPsRnxGmPROmJ70nciGgNKQML4M",
                     "refresh_token": "6c4ac53ebb510e001237b4bb536728593f1b1ea6453e91a5509e98iGgNKQML4M"
                   }
                 }
@@ -259,7 +259,7 @@
                   },
                   "example": {
                     "result": "OK",
-                    "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VyX2VtYWlsIjoidGVzdEBtYWlsLmNvbSIsImV4cCI6MTcwMDkyNDAyOH0.nuJ-2HFN0IK5mRFaaPsRnxGmPROmJ70nciGgNKQML4M",
+                    "access_token": "eyJhbGciOiJIUzI1NiJ9. eyJ1c2VyX2lkIjoxLCJ1c2VyX2VtYWlsIjoidGVzdEBtYWlsLmNvbSIsImV4cCI6MTcwMDkyNDAyOH0. nuJ-2HFN0IK5mRFaaPsRnxGmPROmJ70nciGgNKQML4M",
                     "refresh_token": "6c4ac53ebb510e001237b4bb536728593f1b1ea6453e91a5509e98iGgNKQML4M"
                   }
                 }
@@ -352,5 +352,23 @@
         }
       }
     }
-  }
+  },
+  "servers": [
+    {
+      "url": "https://{serverHost}",
+      "variables": {
+        "serverHost": {
+          "default": "api-marketplace-fpuc.onrender.com"
+        }
+      }
+    },
+    {
+      "url": "http://{host}",
+      "variables": {
+        "host": {
+          "default": "localhost:3000"
+        }
+      }
+    }
+  ]
 }
