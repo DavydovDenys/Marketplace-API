@@ -7,15 +7,19 @@
 # Ignore bundler config.
 /.bundle
 
+# redis db file
+dump.rdb
+
 #ignore env setup files
 /.env
+/env/*
 
 *.DS_Store
 
 /.env.local
 
 #ignore api generation file
-/swagger/*
+# /swagger/*
 
 # Ignore all logfiles and tempfiles.
 /log/*

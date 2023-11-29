@@ -1,8 +1,18 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  root 'home#home'
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  mount Rswag::Ui::Engine => '/api-docs'
+  mount Rswag::Api::Engine => '/api-docs'
+
+  resources :healthz, only: %i[index create]
+
+  namespace :api do
+    namespace :v1 do
+      post 'auth/registry', to: 'authentication#registry'
+      post 'auth/refresh', to: 'authentication#refresh'
+      post 'auth/login', to: 'authentication#login'
+    end
+  end
 end

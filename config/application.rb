@@ -24,7 +24,9 @@ module Marketplace
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
+    # Bundler.require(*Rails.groups)
 
+    # HOSTNAME = ENV['HOSTNAME']
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
@@ -37,5 +39,9 @@ module Marketplace
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+    Dir[Rails.root.join('lib', 'core_extensions', '**', '*.rb')].each { |f| require(f) }
+    config.autoload_paths << Rails.root.join('lib').to_s
+    # Load dotenv only in development or test environment
+    Dotenv.load Rails.root.join('env', '.env.dev') if %w[development test].include? ENV['RAILS_ENV']
   end
 end
