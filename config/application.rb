@@ -26,10 +26,7 @@ module Marketplace
     config.load_defaults 7.0
     # Bundler.require(*Rails.groups)
 
-    # Load dotenv only in development or test environment
-    if ['development', 'test'].include? ENV['RAILS_ENV']
-      Dotenv.load  Rails.root.join('env/.env.dev')
-    end
+    
 
     # HOSTNAME = ENV['HOSTNAME']
     # Configuration for the application, engines, and railties goes here.
@@ -46,5 +43,9 @@ module Marketplace
     config.api_only = true
     Dir[Rails.root.join('lib', 'core_extensions', '**', '*.rb')].sort.each { |f| require(f) }
     config.autoload_paths << "#{Rails.root}/lib"
+    # Load dotenv only in development or test environment
+    if ['development', 'test'].include? ENV['RAILS_ENV']
+      Dotenv.load  Rails.root.join('env/.env.dev')
+    end
   end
 end
