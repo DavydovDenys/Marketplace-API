@@ -45,17 +45,25 @@ RSpec.configure do |config|
         title: 'API',
         version: 'v1'
       },
-      paths: {}
-      # servers: [
-      #   {
-      #     url: 'https://{defaultHost}',
-      #     variables: {
-      #       defaultHost: {
-      #         default: 'www.example.com'
-      #       }
-      #     }
-      #   }
-      # ]
+      paths: {},
+      servers: [
+        {
+          url: 'https://{serverHost}',
+          variables: {
+            serverHost: {
+              default: 'api-marketplace-fpuc.onrender.com'
+            }
+          }
+        },
+        {
+          url: 'http://{host}',
+          variables: {
+            host: {
+              default: 'localhost:3000'
+            }
+          }
+        }
+      ]
     }
   }
 
