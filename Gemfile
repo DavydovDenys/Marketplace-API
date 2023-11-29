@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.2.2'
+gem 'bcrypt', '~> 3.1.7'
 gem 'dotenv-rails', require: 'dotenv/rails-now'
 gem 'jbuilder'
 gem 'jwt'
@@ -12,7 +13,6 @@ gem 'pry'
 gem 'puma', '~> 5.0'
 gem 'rails', '~> 7.0.5'
 gem 'redis', '~> 5.0', '>= 5.0.8'
-gem 'bcrypt', '~> 3.1.7'
 # Pagination
 
 gem 'api-pagination', '~> 5.0.0'
@@ -21,8 +21,8 @@ gem 'kaminari', '~> 1.2.2'
 gem 'bootsnap', require: false
 gem 'factory_bot_rails'
 gem 'faker', '~> 3.2.2'
-gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'simplecov-small-badge', require: false
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 # gem "image_processing", "~> 1.2"
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
