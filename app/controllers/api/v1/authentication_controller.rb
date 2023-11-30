@@ -5,6 +5,7 @@ module Api
     class AuthenticationController < ApplicationController
       def registry
         user = User.new(email: user_params[:email], password: user_params[:password])
+
         if user.valid?
           user.save!
           payload = { user_id: user.id, user_email: user.email }
@@ -16,23 +17,15 @@ module Api
         else
           render json: { result: 'Bad Credentials', errors: user.errors.full_messages }, status: :bad_request
         end
+      rescue ActionController::ParameterMissing => e
+        render json: { result: 'Bad Request', errors: [e.message] }, status: :bad_request
+      rescue StandardError => e
+        render json: { result: 'Internal Server Error', errors: [e.message] }, status: :internal_server_error
       end
 
       def refresh
-        begin
-          user = decoded_user
-          exp_time = JSON.parse(redis.get(user.id))['exp']
-        rescue JWT::DecodeError => e
-          return render json: { result: 'Unauthorized', errors: [e.message] }, status: :unauthorized
-        rescue ActiveRecord::RecordNotFound => e
-          return render json: { result: 'Not Found', errors: [e.message] }, status: :not_found
-        rescue JWT::IncorrectAlgorithm => e
-          return render json: { result: 'Unauthorized', errors: [e.message] }, status: :unauthorized
-        rescue TypeError => e
-          return render json: { result: 'Unauthorized', errors: [e.message, 'Token doesn\'t exist'] },
-                        status: :unauthorized
-        end
-
+        user = decoded_user
+        exp_time = JSON.parse(redis.get(user.id))['exp']
         if exp_time < Time.now.to_i
           return render json: { result: 'Unauthorized', errors: ['Signature has expired'] }, status: :unauthorized
         end
@@ -48,14 +41,21 @@ module Api
           redis.set(user.id, { jwt: '', exp: '' }.to_json)
           render json: { result: 'Unauthorized', errors: ['Token mismatch'] }, status: :unauthorized
         end
+      rescue JWT::DecodeError => e
+        render json: { result: 'Unauthorized', errors: [e.message] }, status: :unauthorized
+      rescue ActiveRecord::RecordNotFound => e
+        render json: { result: 'Not Found', errors: [e.message] }, status: :not_found
+      rescue JWT::IncorrectAlgorithm => e
+        render json: { result: 'Unauthorized', errors: [e.message] }, status: :unauthorized
+      rescue TypeError => e
+        render json: { result: 'Unauthorized', errors: [e.message, 'Token doesn\'t exist'] },
+               status: :unauthorized
+      rescue StandardError => e
+        render json: { result: 'Internal Server Error', errors: [e.message] }, status: :internal_server_error
       end
 
       def login
-        begin
-          user = User.find_by!(email: user_params[:email])
-        rescue ActiveRecord::RecordNotFound => e
-          return render json: { result: 'Not Found', errors: [e.message] }, status: :not_found
-        end
+        user = User.find_by!(email: user_params[:email])
 
         unless user.authenticate(user_params[:password])
           return render json: { result: 'Bad Credentials', errors: ['Invalid email or password'] }, status: :bad_request
@@ -66,6 +66,12 @@ module Api
         cookie(refresh_token)
         redis.set(user.id, { jwt: refresh_token, exp: expires.to_i }.to_json)
         render json: { result: 'OK', access_token: access_token }, status: :ok
+      rescue ActionController::ParameterMissing => e
+        render json: { result: 'Bad Request', errors: [e.message] }, status: :bad_request
+      rescue ActiveRecord::RecordNotFound => e
+        render json: { result: 'Not Found', errors: [e.message] }, status: :not_found
+      rescue StandardError => e
+        render json: { result: 'Internal Server Error', errors: [e.message] }, status: :internal_server_error
       end
 
       private
