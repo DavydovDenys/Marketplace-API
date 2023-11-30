@@ -63,6 +63,7 @@ Lint/DuplicateBranch:
 
 Metrics/ClassLength:
   Exclude:
+    - 'app/controllers/api/v1/authentication_controller.rb'
     
 
 Metrics/ParameterLists:
