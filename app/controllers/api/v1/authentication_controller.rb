@@ -55,7 +55,7 @@ module Api
       end
 
       def login
-        user = User.find_by!(email: user_params[:email])
+        user = User.find_by_email!(user_params[:email])
 
         unless user.authenticate(user_params[:password])
           return render json: { result: 'Bad Credentials', errors: ['Invalid email or password'] }, status: :bad_request
