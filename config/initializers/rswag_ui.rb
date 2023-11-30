@@ -11,7 +11,7 @@ Rswag::Ui.configure do |c|
   c.basic_auth_enabled = true
   c.basic_auth_credentials 'test', 'test'
   c.swagger_endpoint '/api-docs/v1/swagger.json', 'v1'
-  c.config_object['validatorUrl'] = 'https://api-marketplace-fpuc.onrender.com'
+  c.config_object['validatorUrl'] = 'none'
   # Add Basic Auth in case your API is private
   # c.basic_auth_enabled = true
   # c.basic_auth_credentials 'username', 'password'
